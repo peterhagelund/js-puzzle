@@ -113,7 +113,7 @@ function main(argv) {
         console.log(`Expected 12 unique letters but found ${size}`);
         return;
     }
-    const words = readDictionary('dictionary.txt', sides);
+    const words = readDictionary(argv.dictionary, sides);
     console.log(`Read ${words.length} words.`);
     findSolutions(words, argv.goal, argv.maxDuration);
 }
@@ -124,6 +124,10 @@ const argv = Yargs(process.argv.slice(2))
     .string('s')
     .describe('s', 'Specify the sides of the box')
     .demandOption('s')
+    .alias('d', 'dictionary')
+    .string('d')
+    .describe('d', 'The dictionary to load')
+    .default('d', 'dictionary.txt')
     .alias('g', 'goal')
     .nargs('g', 1)
     .number('g')
