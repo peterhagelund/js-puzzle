@@ -26,16 +26,14 @@ function readDictionary(path, sides) {
                     break;
                 }
             }
-            return true
+            return true;
         })
-        .map((line) => {
-            return {
-                'text': line,
-                'value': new Set(line).size,
-                'first': line[0],
-                'last': line[line.length - 1]
-            };
-        })
+        .map((line) => ({
+            'text': line,
+            'value': new Set(line).size,
+            'first': line[0],
+            'last': line[line.length - 1]
+        }))
         .sort((a, b) => b.value - a.value || a.text.localeCompare(b.text));
 }
 
