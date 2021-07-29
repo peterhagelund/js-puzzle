@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "node index.js",
+        "start": "node index.js -s EAR,INU,SVC,OXW -g 5 -m 30 -d dictionary.txt",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
