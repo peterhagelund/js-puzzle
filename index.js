@@ -29,10 +29,10 @@ function readDictionary(path, sides) {
             return true;
         })
         .map((line) => ({
-            'text': line,
-            'value': new Set(line).size,
-            'first': line[0],
-            'last': line[line.length - 1]
+            text: line,
+            value: new Set(line).size,
+            first: line[0],
+            last: line[line.length - 1]
         }))
         .sort((a, b) => b.value - a.value || a.text.localeCompare(b.text));
 }
