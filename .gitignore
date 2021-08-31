@@ -106,3 +106,4 @@ dist
 # Local un-tracked files
 
 dictionary.txt
+.vscode/
