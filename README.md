@@ -1,6 +1,6 @@
-# js-box
+# js-puzzle
 
-Command-line utility for solving a "letter-boxed" puzzle.
+Command-line utility for solving some weird puzzles.
 
 ## Copyright and License
 
@@ -10,7 +10,9 @@ This software is licensed under the [MIT License](https://en.wikipedia.org/wiki/
 
 See `LICENSE.txt`
 
-## Background
+# Background
+
+## Letter-boxed
 
 Letter-boxed is a brain-teaser puzzle I have come across in The New York Times.
 
@@ -34,10 +36,10 @@ The best solution is considered to be the one using the fewest and shortest word
 
 ### Constraints
 
-* Each word must be a common word, found in the US English dictionary. ("Ain't" ain't in the dictionary 'cause "ain't" ain't a word!)
-* No proper names may be used. ("state" yes, "Vermont" no.)
-* Each consecutive word must start with the same letter as the last letter of the previous word. (e.g. "PLOD", "DARE", "EAGER".)
-* Each consecutive letter within a word must be from a different side of the box. (from the example puzzle above, "DARE" yes, "DATE" no - as "A" and "T" are on the same side of the box.)
+- Each word must be a common word, found in the US English dictionary. ("Ain't" ain't in the dictionary 'cause "ain't" ain't a word!)
+- No proper names may be used. ("state" yes, "Vermont" no.)
+- Each consecutive word must start with the same letter as the last letter of the previous word. (e.g. "PLOD", "DARE", "EAGER".)
+- Each consecutive letter within a word must be from a different side of the box. (from the example puzzle above, "DARE" yes, "DATE" no - as "A" and "T" are on the same side of the box.)
 
 ## Approach
 
@@ -49,20 +51,50 @@ When loading the dictionary, illegal words are filtered out and then the result 
 
 The solution search itself is a brute-force recursive search. The general recursive processing is:
 
-* Add the next word in the list to the current, possible solution.
-* If that word solves the puzzle, see if it's a better solution than the current best one and, if so, make this the current best one.
-* If that word adds to the number of letters use, recurse and try adding another word.
-* Remove the word from the list and loop around.
-* Within the main loop over the possible start words, a duration check is made that break out of that loop when time's up. (This check is approximate as the number of combinations for a given word can take an arbitrary long time, so rather than checking at every word the check is made at each new start word.)
+- Add the next word in the list to the current, possible solution.
+- If that word solves the puzzle, see if it's a better solution than the current best one and, if so, make this the current best one.
+- If that word adds to the number of letters use, recurse and try adding another word.
+- Remove the word from the list and loop around.
+- Within the main loop over the possible start words, a duration check is made that break out of that loop when time's up. (This check is approximate as the number of combinations for a given word can take an arbitrary long time, so rather than checking at every word the check is made at each new start word.)
 
 The command-line argument gymnastics are mostly handled by `yargs` and allow the specification of:
 
-* The 4 sides of 3 letters each.
-* The goal.
-* The maximum duration allotted to find a solution.
+- The 4 sides of 3 letters each.
+- The goal.
+- The maximum duration allotted to find a solution.
 
 ## Running
 
-`node main.js -s GLR,OAT,DMP,IEU -g 4 -m 10`
+`node index.js box -s GLR,OAT,DMP,IEU -g 4 -m 10`
 
 Look for solutions to the above example puzzle with a goal of 4 words (or less) for no more than 10 seconds.
+
+## Bee
+
+Bee is another brain-teaser puzzle I've come across in The New York Times.
+
+The puzzle is presented as a single letter surrounded by six other letters arranged in a hexagon shape.
+
+       Y
+    H     W
+       I
+    E     G
+       T
+
+No letters are repeated - it is always 7 different letters.
+
+### Goal
+
+TODO
+
+### Constraints
+
+TODO
+
+## Approach
+
+TODO
+
+## Running
+
+`node index.js bee -m I -o YWGTEH`
