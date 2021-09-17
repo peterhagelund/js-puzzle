@@ -20,19 +20,8 @@ function readDictionary(path, middle, others) {
     .sort((a, b) => b.length - a.length || a.localeCompare(b));
 }
 
-function bee(argv) {
-  const middle = argv.middle.toUpperCase();
-  if (middle.length != 1) {
-    console.log(`Expected a single middle letter but got ${middle.length}`);
-    return;
-  }
-  const others = argv.others.toUpperCase();
-  const size = new Set(argv.others).size;
-  if (size != 6) {
-    console.log(`Expected six unique other letters but got ${size}`);
-    return;
-  }
-  const words = readDictionary("dictionary.txt", middle, others);
+function bee(dictionary, middle, others) {
+  const words = readDictionary(dictionary, middle, others);
   console.log(`Read ${words.length} words.`);
   words.forEach((word) => console.log(word));
 }

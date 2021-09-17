@@ -95,28 +95,10 @@ function findSolution(words, currentSolution, bestSolution, uniqueLetters, goal)
   return bestSolution;
 }
 
-function box(argv) {
-  const sides = argv.sides.split(",");
-  if (sides.length != 4) {
-    console.log(`Expected 4 sides, but found ${sides.length}`);
-    return;
-  }
-  for (let i = 0; i < 4; i++) {
-    if (sides[i].length != 3) {
-      console.log(`Expected side to have length 3, but found side ${i + 1} to be ${sides[i].length}`);
-      return;
-    } else {
-      sides[i] = sides[i].toUpperCase();
-    }
-  }
-  const size = new Set(sides.join("")).size;
-  if (size != 12) {
-    console.log(`Expected 12 unique letters but found ${size}`);
-    return;
-  }
-  const words = readDictionary(argv.dictionary, sides);
+function box(dictionary, sides, goal, maxDuration) {
+  const words = readDictionary(dictionary, sides);
   console.log(`Read ${words.length} words.`);
-  findSolutions(words, argv.goal, argv.maxDuration);
+  findSolutions(words, goal, maxDuration);
 }
 
 export default box;
